@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
-# hello_git.py
-print("Hello Git")
+# hello_git.pl
+print "Hello Git"
 ## Hello Git
