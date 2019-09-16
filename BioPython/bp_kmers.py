@@ -37,8 +37,13 @@ if dna_string.mode == "r": # if file is open for reading
            kmer_counts[kmer] +=1 #add one
         else: # if not
            kmer_counts[kmer] = 1 # leave it at one
-
-
+    for kmer in kmer_counts: # looks for kmer in kmer_counts
+        if kmer_counts[kmer] ==1: # if kmer_counts is only one
+           uniquekmer = uniquekmer + "   " + kmer # adds uniquekmers with spaces and new kmer
+           #print(kmer) # prints kmer
+           NewSeq = SeqRecord(Seq(uniquekmer), id=chid)  # NewSeq with id to create new fasta file
+           SeqIO.write(NewSeq, "kmers.fasta", "fasta")  # writes to the new fasta file naming it kmers.fasta
+ 
 
 
 
