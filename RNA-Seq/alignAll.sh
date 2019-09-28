@@ -15,6 +15,7 @@ do
     #echo $pathRemoved 
     #Remove the left-read suffix from $pathRemoved and assign to suffixRemoved
     sampleName="${pathRemoved/$leftSuffix/}"
+    #echo $sampleName
     nice -n19 gsnap \
     -A sam \
     -D . \
