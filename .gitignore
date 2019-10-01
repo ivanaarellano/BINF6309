@@ -4,5 +4,6 @@
 !*.py
 !*.R
 !*.Rmd
+!*.md
 *.fasta
 !.gitignore

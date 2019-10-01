@@ -4,34 +4,32 @@
 PairedPath="/scratch/SampleDataFiles/Paired/"
 #Initialize variable to contain the suffix for the left reads
 outDir='quant/'
-#sample='Aip02'
 leftSuffix=".R1.paired.fastq"
 rightSuffix=".R2.paired.fastq"
-ErrOutPath="/home/arellano.i/BINF6309/DifferentialExpression/Err"
 #Loop through all the left-read fastq files in $fastqPath
 for leftInPaired in $PairedPath*$leftSuffix
 do
     #Remove the path from the filename and assign to pathRemoved
     pathRemoved="${leftInPaired/$PairedPath/}"
-    #echo $pathRemoved 
+    echo $pathRemoved 
     #Remove the left-read suffix from $pathRemoved and assign to suffixRemoved
     sampleName="${pathRemoved/$leftSuffix/}"
-    #echo $sampleName
-    
-
-
-
-    #$PairedPath$sampleName$leftSuffix \
-    #$PairedPath$sampleName$rightSuffix \
-    #1>$SamOutPath$sampleName.sam 2>$ErrOutPath$sampleName.err
+    echo $sampleName
+    $PairedPath$sampleName$leftSuffix \
+    $PairedPath$sampleName$rightSuffix \
+    function align {
+    salmon quant -l IU is \
+        -1 /scratch/SampleDataFiles/Paired/$sampleName.R1.paired.fastq \
+        -2 /scratch/SampleDataFiles/Paired/$sampleName.R2.paired.fastq \
+        -i AipIndex \
+        --validateMappings \
+        -o $outDir$sampleName }
+    align 1>$align.log 2>$align.err &
 done
-
-
-
 
 #!/usr/bin/env bash
 #outDir='quant/'
-#sample='Aip02'
+#sample='Aip*'
 #function align {
 #    salmon quant -l IU is \
 #        -1 /scratch/SampleDataFiles/Paired/$sample.R1.paired.fastq \
