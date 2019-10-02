@@ -1,4 +1,4 @@
-Aauthor: Ivana Arellano output: html\_document: toc: true toc\_depth: 4
+Author: Ivana Arellano output: html\_document: toc: true toc\_depth: 4
 toc\_float: true dev: ‘svg’ md\_document: variant: gfm bibliography:
 bibliography.ris —
 

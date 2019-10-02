@@ -1,5 +1,4 @@
-
-Aauthor: Ivana Arellano
+Author: Ivana Arellano
 output:
   html_document:
     toc: true
