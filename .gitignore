@@ -8,3 +8,4 @@
 !*.ris
 *.fasta
 !.gitignore
+!*.ris
