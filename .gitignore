@@ -7,3 +7,4 @@
 !*.md
 *.fasta
 !.gitignore
+!*.ris
