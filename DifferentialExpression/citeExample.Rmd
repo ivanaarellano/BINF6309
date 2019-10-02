@@ -9,6 +9,7 @@ output:
   md_document:
     variant: gfm
 bibliography: bibliography.ris
+link-citations: yes
 ---
 
 ## Overview
