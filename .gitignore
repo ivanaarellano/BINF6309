@@ -5,6 +5,7 @@
 !*.R
 !*.Rmd
 !*.md
+!*.ris
 *.fasta
 !.gitignore
 !*.ris
