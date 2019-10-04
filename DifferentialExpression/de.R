@@ -32,12 +32,14 @@ for (result in resultsNames(dds)){
         res <- results(dds, alpha=.05, name=result)
         dfRes <- as.data.frame(res)
         dfRes <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
+        #dfRes2 <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
         dfRes$Factor <- result
         dfAll <- rbind(dfAll, dfRes)
+        deAnnotated <- dfAll[dfAll$padj<0.05, ]
     }
 }
 head(dfAll)
-
+head(deAnnotated)
 
 write.csv(dfAll, file="dfAll.csv")
-
+write.csv(deAnnotated, na=" ", file="deAnnotated.csv")

@@ -1,0 +1,185 @@
+author: Ivana Arellano output: html\_document: toc: true toc\_depth: 4
+toc\_float: true dev: ‘svg’ md\_document: variant: gfm bibliography:
+bibliography.ris —
+
+    #!/usr/bin/env Rscript
+    # de.R
+    library(tximport)
+    library(readr)
+    library(DESeq2)
+
+    ## Loading required package: S4Vectors
+
+    ## Loading required package: stats4
+
+    ## Loading required package: BiocGenerics
+
+    ## Loading required package: parallel
+
+    ## 
+    ## Attaching package: 'BiocGenerics'
+
+    ## The following objects are masked from 'package:parallel':
+    ## 
+    ##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    ##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+    ##     parLapplyLB, parRapply, parSapply, parSapplyLB
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     IQR, mad, sd, var, xtabs
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     anyDuplicated, append, as.data.frame, basename, cbind,
+    ##     colMeans, colnames, colSums, dirname, do.call, duplicated,
+    ##     eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    ##     is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    ##     paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    ##     Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    ##     table, tapply, union, unique, unsplit, which, which.max,
+    ##     which.min
+
+    ## 
+    ## Attaching package: 'S4Vectors'
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     expand.grid
+
+    ## Loading required package: IRanges
+
+    ## Loading required package: GenomicRanges
+
+    ## Loading required package: GenomeInfoDb
+
+    ## Loading required package: SummarizedExperiment
+
+    ## Loading required package: Biobase
+
+    ## Welcome to Bioconductor
+    ## 
+    ##     Vignettes contain introductory material; view with
+    ##     'browseVignettes()'. To cite Bioconductor, see
+    ##     'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+    ## Loading required package: DelayedArray
+
+    ## Loading required package: matrixStats
+
+    ## 
+    ## Attaching package: 'matrixStats'
+
+    ## The following objects are masked from 'package:Biobase':
+    ## 
+    ##     anyMissing, rowMedians
+
+    ## Loading required package: BiocParallel
+
+    ## 
+    ## Attaching package: 'DelayedArray'
+
+    ## The following objects are masked from 'package:matrixStats':
+    ## 
+    ##     colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     aperm, apply
+
+    ## Registered S3 methods overwritten by 'ggplot2':
+    ##   method         from 
+    ##   [.quosures     rlang
+    ##   c.quosures     rlang
+    ##   print.quosures rlang
+
+    tx2gene <- read.csv("tx2gene.csv")
+    head(tx2gene)
+
+    ##                     trans        ko
+    ## 1 TRINITY_DN9495_c0_g1_i2 ko:K00134
+    ## 2 TRINITY_DN9573_c0_g1_i1 ko:K01689
+    ## 3 TRINITY_DN9485_c0_g1_i1 ko:K02111
+    ## 4 TRINITY_DN8020_c0_g1_i1 ko:K04043
+    ## 5 TRINITY_DN9453_c0_g1_i1 ko:K02932
+    ## 6 TRINITY_DN8136_c0_g1_i1 ko:K02932
+
+    samples <- read.csv("Samples.csv", header=TRUE)
+    head(samples)
+
+    ##   Sample Menthol  Vibrio
+    ## 1  Aip17 Menthol  Vibrio
+    ## 2  Aip20 Control  Vibrio
+    ## 3  Aip24 Menthol Control
+    ## 4  Aip28 Control Control
+    ## 5  Aip14 Menthol  Vibrio
+    ## 6  Aip26 Control  Vibrio
+
+    files <- file.path("quant", samples$Sample, "quant.sf")
+    txi <- tximport(files, type="salmon", tx2gene=tx2gene)
+
+    ## reading in files with read_tsv
+
+    ## 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 
+    ## removing duplicated transcript rows from tx2gene
+    ## transcripts missing from tx2gene: 34247
+    ## summarizing abundance
+    ## summarizing counts
+    ## summarizing length
+
+    dds <- DESeqDataSetFromTximport(txi, colData = samples, 
+                                    design = ~ Menthol + Vibrio)
+
+    ## using counts and average transcript lengths from tximport
+
+    dds$Vibrio <- relevel(dds$Vibrio, ref = "Control")
+    dds$Menthol <- relevel(dds$Menthol, ref = "Control")
+    keep <- rowSums(counts(dds)) >= 10
+    dds <- dds[keep,]
+    dds <- DESeq(dds)
+
+    ## estimating size factors
+    ## using 'avgTxLength' from assays(dds), correcting for library size
+    ## estimating dispersions
+    ## gene-wise dispersion estimates
+    ## mean-dispersion relationship
+    ## final dispersion estimates
+    ## fitting model and testing
+
+    padj <- .05
+    minLog2FoldChange <- .5
+    dfAll <- data.frame()
+    # Get all DE results except Intercept, and "flatten" into a single file.
+    for (result in resultsNames(dds)){
+        if(result != 'Intercept'){
+            res <- results(dds, alpha=.05, name=result)
+            dfRes <- as.data.frame(res)
+            dfRes <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
+            #dfRes2 <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
+            dfRes$Factor <- result
+            dfAll <- rbind(dfAll, dfRes)
+            deAnnotated <- dfAll[dfAll$padj<0.05, ]
+        }
+    }
+    head(dfAll)
+
+    ##           log2FoldChange      padj                     Factor
+    ## ko:K00024     -0.8911538 0.9451212 Menthol_Menthol_vs_Control
+    ## ko:K00031     -0.6697382 0.9451212 Menthol_Menthol_vs_Control
+    ## ko:K00128     -0.2298731 0.9451212 Menthol_Menthol_vs_Control
+    ## ko:K00134      1.5180924 0.7033672 Menthol_Menthol_vs_Control
+    ## ko:K00140      0.1497166 0.9451212 Menthol_Menthol_vs_Control
+    ## ko:K00207      0.3407041 0.9451212 Menthol_Menthol_vs_Control
+
+    head(deAnnotated)
+
+    ##           log2FoldChange         padj                     Factor
+    ## ko:K04354     -2.0688593 2.730434e-02 Menthol_Menthol_vs_Control
+    ## ko:K13785     -2.6721653 1.543763e-05 Menthol_Menthol_vs_Control
+    ## ko:K14965     -6.1769357 2.684604e-10 Menthol_Menthol_vs_Control
+    ## ko:K17920      1.1188279 1.137527e-06 Menthol_Menthol_vs_Control
+    ## ko:K20369      0.6055302 1.630712e-02 Menthol_Menthol_vs_Control
+    ## NA                    NA           NA                       <NA>
+
+    write.csv(dfAll, file="dfAll.csv")
+    write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
