@@ -1,11 +1,10 @@
-author: Ivana Arellano output: md\_document: variant: gfm bibliography:
-bibliography.ris —
-
-    #!/usr/bin/env Rscript
-    # de.R
-    library(tximport)
-    library(readr)
-    library(DESeq2)
+``` r
+#!/usr/bin/env Rscript
+# de.R
+library(tximport)
+library(readr)
+library(DESeq2)
+```
 
     ## Loading required package: S4Vectors
 
@@ -92,9 +91,11 @@ bibliography.ris —
     ##   c.quosures     rlang
     ##   print.quosures rlang
 
-    library(knitr)
-    tx2gene <- read.csv("tx2gene.csv")
-    head(tx2gene)
+``` r
+library(knitr)
+tx2gene <- read.csv("tx2gene.csv")
+head(tx2gene)
+```
 
     ##                     trans        ko
     ## 1 TRINITY_DN9495_c0_g1_i2 ko:K00134
@@ -104,8 +105,10 @@ bibliography.ris —
     ## 5 TRINITY_DN9453_c0_g1_i1 ko:K02932
     ## 6 TRINITY_DN8136_c0_g1_i1 ko:K02932
 
-    samples <- read.csv("Samples.csv", header=TRUE)
-    head(samples)
+``` r
+samples <- read.csv("Samples.csv", header=TRUE)
+head(samples)
+```
 
     ##   Sample Menthol  Vibrio
     ## 1  Aip17 Menthol  Vibrio
@@ -115,8 +118,10 @@ bibliography.ris —
     ## 5  Aip14 Menthol  Vibrio
     ## 6  Aip26 Control  Vibrio
 
-    files <- file.path("quant", samples$Sample, "quant.sf")
-    txi <- tximport(files, type="salmon", tx2gene=tx2gene)
+``` r
+files <- file.path("quant", samples$Sample, "quant.sf")
+txi <- tximport(files, type="salmon", tx2gene=tx2gene)
+```
 
     ## reading in files with read_tsv
 
@@ -127,16 +132,20 @@ bibliography.ris —
     ## summarizing counts
     ## summarizing length
 
-    dds <- DESeqDataSetFromTximport(txi, colData = samples, 
-                                    design = ~ Menthol + Vibrio)
+``` r
+dds <- DESeqDataSetFromTximport(txi, colData = samples, 
+                                design = ~ Menthol + Vibrio)
+```
 
     ## using counts and average transcript lengths from tximport
 
-    dds$Vibrio <- relevel(dds$Vibrio, ref = "Control")
-    dds$Menthol <- relevel(dds$Menthol, ref = "Control")
-    keep <- rowSums(counts(dds)) >= 10
-    dds <- dds[keep,]
-    dds <- DESeq(dds)
+``` r
+dds$Vibrio <- relevel(dds$Vibrio, ref = "Control")
+dds$Menthol <- relevel(dds$Menthol, ref = "Control")
+keep <- rowSums(counts(dds)) >= 10
+dds <- dds[keep,]
+dds <- DESeq(dds)
+```
 
     ## estimating size factors
     ## using 'avgTxLength' from assays(dds), correcting for library size
@@ -146,26 +155,28 @@ bibliography.ris —
     ## final dispersion estimates
     ## fitting model and testing
 
-    padj <- .05
-    minLog2FoldChange <- .5
-    dfAll <- data.frame()
-    # Get all DE results except Intercept, and "flatten" into a single file.
-    for (result in resultsNames(dds)){
-        if(result != 'Intercept'){
-            res <- results(dds, alpha=.05, name=result)
-            dfRes <- as.data.frame(res)
-            dfRes <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
-            #dfRes2 <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
-            dfRes$Factor <- result
-            dfAll <- rbind(dfAll, dfRes)    
-            deAnnotated <- dfAll[dfAll$padj<0.05, ]
-            MergeDeAnnotated <-  merge(deAnnotated, tx2gene)
-            deAnnotated <-unique(subset(MergeDeAnnotated, select=c(trans, ko, padj, Factor)))
-            #deAnnotated <- rbind(deAnnotated, MergeDeAnnotated)
+``` r
+padj <- .05
+minLog2FoldChange <- .5
+dfAll <- data.frame()
+# Get all DE results except Intercept, and "flatten" into a single file.
+for (result in resultsNames(dds)){
+    if(result != 'Intercept'){
+        res <- results(dds, alpha=.05, name=result)
+        dfRes <- as.data.frame(res)
+        dfRes <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
+        #dfRes2 <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
+        dfRes$Factor <- result
+        dfAll <- rbind(dfAll, dfRes)    
+        deAnnotated <- dfAll[dfAll$padj<0.05, ]
+        MergeDeAnnotated <-  merge(deAnnotated, tx2gene)
+        deAnnotated <-unique(subset(MergeDeAnnotated, select=c(trans, ko, padj, Factor)))
+        #deAnnotated <- rbind(deAnnotated, MergeDeAnnotated)
 
-        }
     }
-    head(dfAll)
+}
+head(dfAll)
+```
 
     ##           log2FoldChange      padj                     Factor
     ## ko:K00024     -0.8911538 0.9451212 Menthol_Menthol_vs_Control
@@ -175,56 +186,20 @@ bibliography.ris —
     ## ko:K00140      0.1497166 0.9451212 Menthol_Menthol_vs_Control
     ## ko:K00207      0.3407041 0.9451212 Menthol_Menthol_vs_Control
 
-    kable(head(deAnnotated))
+``` r
+kable(head(deAnnotated))
+```
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">trans</th>
-<th style="text-align: left;">ko</th>
-<th style="text-align: right;">padj</th>
-<th style="text-align: left;">Factor</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
-<td style="text-align: left;">ko:K00134</td>
-<td style="text-align: right;">0.0273043</td>
-<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
-<td style="text-align: left;">ko:K00134</td>
-<td style="text-align: right;">0.0000154</td>
-<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
-<td style="text-align: left;">ko:K00134</td>
-<td style="text-align: right;">0.0000000</td>
-<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
-<td style="text-align: left;">ko:K00134</td>
-<td style="text-align: right;">0.0000011</td>
-<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
-<td style="text-align: left;">ko:K00134</td>
-<td style="text-align: right;">0.0163071</td>
-<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
-<td style="text-align: left;">ko:K00134</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-</tr>
-</tbody>
-</table>
+| trans                       | ko        |      padj | Factor                        |
+| :-------------------------- | :-------- | --------: | :---------------------------- |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0273043 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000154 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000000 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000011 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0163071 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 |        NA | NA                            |
 
-    write.csv(dfAll, file="dfAll.csv")
-    write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
+``` r
+write.csv(dfAll, file="dfAll.csv")
+write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
+```

@@ -1,8 +1,10 @@
-author: Ivana Arellano
+---
+Author: Ivana Arellano
 output:
   md_document:
     variant: gfm
 bibliography: bibliography.ris
+link-citations: yes
 ---
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
