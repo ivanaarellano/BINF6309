@@ -15,9 +15,5 @@ link-citations: yes
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
 '''
-
 ## Results
-
-
-
 
