@@ -1,5 +1,4 @@
-author: Ivana Arellano output: html\_document: toc: true toc\_depth: 4
-toc\_float: true dev: ‘svg’ md\_document: variant: gfm bibliography:
+author: Ivana Arellano output: md\_document: variant: gfm bibliography:
 bibliography.ris —
 
     #!/usr/bin/env Rscript
@@ -93,6 +92,7 @@ bibliography.ris —
     ##   c.quosures     rlang
     ##   print.quosures rlang
 
+    library(knitr)
     tx2gene <- read.csv("tx2gene.csv")
     head(tx2gene)
 
@@ -157,8 +157,12 @@ bibliography.ris —
             dfRes <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
             #dfRes2 <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
             dfRes$Factor <- result
-            dfAll <- rbind(dfAll, dfRes)
+            dfAll <- rbind(dfAll, dfRes)    
             deAnnotated <- dfAll[dfAll$padj<0.05, ]
+            MergeDeAnnotated <-  merge(deAnnotated, tx2gene)
+            deAnnotated <-unique(subset(MergeDeAnnotated, select=c(trans, ko, padj, Factor)))
+            #deAnnotated <- rbind(deAnnotated, MergeDeAnnotated)
+
         }
     }
     head(dfAll)
@@ -171,15 +175,56 @@ bibliography.ris —
     ## ko:K00140      0.1497166 0.9451212 Menthol_Menthol_vs_Control
     ## ko:K00207      0.3407041 0.9451212 Menthol_Menthol_vs_Control
 
-    head(deAnnotated)
+    kable(head(deAnnotated))
 
-    ##           log2FoldChange         padj                     Factor
-    ## ko:K04354     -2.0688593 2.730434e-02 Menthol_Menthol_vs_Control
-    ## ko:K13785     -2.6721653 1.543763e-05 Menthol_Menthol_vs_Control
-    ## ko:K14965     -6.1769357 2.684604e-10 Menthol_Menthol_vs_Control
-    ## ko:K17920      1.1188279 1.137527e-06 Menthol_Menthol_vs_Control
-    ## ko:K20369      0.6055302 1.630712e-02 Menthol_Menthol_vs_Control
-    ## NA                    NA           NA                       <NA>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">trans</th>
+<th style="text-align: left;">ko</th>
+<th style="text-align: right;">padj</th>
+<th style="text-align: left;">Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
+<td style="text-align: left;">ko:K00134</td>
+<td style="text-align: right;">0.0273043</td>
+<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
+<td style="text-align: left;">ko:K00134</td>
+<td style="text-align: right;">0.0000154</td>
+<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
+<td style="text-align: left;">ko:K00134</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
+<td style="text-align: left;">ko:K00134</td>
+<td style="text-align: right;">0.0000011</td>
+<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
+<td style="text-align: left;">ko:K00134</td>
+<td style="text-align: right;">0.0163071</td>
+<td style="text-align: left;">Menthol_Menthol_vs_Control</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRINITY_DN9495_c0_g1_i2</td>
+<td style="text-align: left;">ko:K00134</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
 
     write.csv(dfAll, file="dfAll.csv")
     write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
