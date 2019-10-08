@@ -6,7 +6,7 @@ bibliography: bibliography.ris
 ---
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
-
+'''
 ## Methods
 
 1. Salmon [@Patro] to estimate relative abundance
