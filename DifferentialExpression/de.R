@@ -43,7 +43,8 @@ for (result in resultsNames(dds)){
 
     }
 }
-head(dfAll)
+#head(dfAll)
+
 kable(head(deAnnotated))
 
 

@@ -1,4 +1,5 @@
 ---
+Title: Differential Expression
 Author: Ivana Arellano
 output:
   md_document:
@@ -18,6 +19,7 @@ link-citations: yes
 
 ### Results
 
-
-data <- deAnnotated.csv(params$deAnnotated.csv)
-kable(head(deAnnotated))
+```{R, echo=FALSE, results = 'asis'}
+library(knitr)
+kable(head(deAnnotated), caption = "deAnnotated Table")
+```

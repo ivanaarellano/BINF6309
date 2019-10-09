@@ -186,18 +186,8 @@ for (result in resultsNames(dds)){
 
     }
 }
-head(dfAll)
-```
+#head(dfAll)
 
-    ##           log2FoldChange      padj                     Factor
-    ## ko:K00024     -0.8911538 0.9451212 Menthol_Menthol_vs_Control
-    ## ko:K00031     -0.6697382 0.9451212 Menthol_Menthol_vs_Control
-    ## ko:K00128     -0.2298731 0.9451212 Menthol_Menthol_vs_Control
-    ## ko:K00134      1.5180924 0.7033672 Menthol_Menthol_vs_Control
-    ## ko:K00140      0.1497166 0.9451212 Menthol_Menthol_vs_Control
-    ## ko:K00207      0.3407041 0.9451212 Menthol_Menthol_vs_Control
-
-``` r
 kable(head(deAnnotated))
 ```
 
@@ -214,6 +204,17 @@ kable(head(deAnnotated))
 write.csv(dfAll, file="dfAll.csv")
 write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
 ```
+
+| trans                       | ko        |      padj | Factor                        |
+| :-------------------------- | :-------- | --------: | :---------------------------- |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0273043 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000154 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000000 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000011 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0163071 | Menthol\_Menthol\_vs\_Control |
+| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 |        NA | NA                            |
+
+deAnnotated Table
 
 <div id="refs" class="references">
 
