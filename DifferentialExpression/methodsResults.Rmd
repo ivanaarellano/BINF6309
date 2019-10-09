@@ -8,7 +8,7 @@ bibliography: bibliography.ris
 link-citations: yes
 ---
 
-## Methods
+### Methods
 
  1. Salmon [@Patro] to estimate relative abundance
  2. tximport [@Soneson] to import the Salmon abundance
@@ -17,7 +17,7 @@ link-citations: yes
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
 '''
 
-## Results
+### Results
 
 ```{R, echo=FALSE, results = 'asis'}
 library(knitr)
