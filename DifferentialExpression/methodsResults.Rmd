@@ -19,9 +19,10 @@ link-citations: yes
 
 ---
 
-## Results
+# Results
 
 ```{R, echo=FALSE, results = 'asis'}
 library(knitr)
 kable(head(deAnnotated), caption = "Table")
 ```
+
