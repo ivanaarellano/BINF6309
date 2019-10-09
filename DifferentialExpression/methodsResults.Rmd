@@ -17,3 +17,6 @@ link-citations: yes
 '''
 ### Results
 
+
+data <- deAnnotated.csv(params$deAnnotated.csv)
+head(data)

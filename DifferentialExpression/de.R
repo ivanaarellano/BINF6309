@@ -46,5 +46,8 @@ for (result in resultsNames(dds)){
 head(dfAll)
 kable(head(deAnnotated))
 
+
+
+
 write.csv(dfAll, file="dfAll.csv")
 write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
