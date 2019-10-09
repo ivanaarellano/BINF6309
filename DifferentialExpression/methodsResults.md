@@ -206,7 +206,7 @@ write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
 | TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0163071 | Menthol\_Menthol\_vs\_Control |
 | TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 |        NA | NA                            |
 
-deAnnotated Table
+Table
 
 <div id="refs" class="references">
 

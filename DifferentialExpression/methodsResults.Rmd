@@ -23,5 +23,5 @@ link-citations: yes
 
 ```{R, echo=FALSE, results = 'asis'}
 library(knitr)
-kable(head(deAnnotated), caption = "deAnnotated Table")
+kable(head(deAnnotated), caption = "Table")
 ```
