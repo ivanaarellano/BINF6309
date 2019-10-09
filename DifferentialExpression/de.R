@@ -45,7 +45,7 @@ for (result in resultsNames(dds)){
 }
 #head(dfAll)
 
-kable(head(deAnnotated))
+#kable(head(deAnnotated))
 
 
 

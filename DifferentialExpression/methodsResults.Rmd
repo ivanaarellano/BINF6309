@@ -16,9 +16,7 @@ link-citations: yes
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
 '''
-
-### Results
-
+# Results
 ```{R, echo=FALSE, results = 'asis'}
 library(knitr)
 kable(head(deAnnotated), caption = "deAnnotated Table")

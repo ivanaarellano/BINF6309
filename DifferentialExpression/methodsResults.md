@@ -188,19 +188,11 @@ for (result in resultsNames(dds)){
 }
 #head(dfAll)
 
-kable(head(deAnnotated))
-```
+#kable(head(deAnnotated))
 
-| trans                       | ko        |      padj | Factor                        |
-| :-------------------------- | :-------- | --------: | :---------------------------- |
-| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0273043 | Menthol\_Menthol\_vs\_Control |
-| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000154 | Menthol\_Menthol\_vs\_Control |
-| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000000 | Menthol\_Menthol\_vs\_Control |
-| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0000011 | Menthol\_Menthol\_vs\_Control |
-| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 | 0.0163071 | Menthol\_Menthol\_vs\_Control |
-| TRINITY\_DN9495\_c0\_g1\_i2 | ko:K00134 |        NA | NA                            |
 
-``` r
+
+
 write.csv(dfAll, file="dfAll.csv")
 write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
 ```
