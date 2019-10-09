@@ -15,7 +15,7 @@ link-citations: yes
  3. DESeq2 [@Love] to perform statistical tests to identify differentially expressed genes
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
-'''
+```
 
 ### Results
 
