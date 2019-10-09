@@ -15,8 +15,9 @@ link-citations: yes
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
 '''
+
 ### Results
 
 
 data <- deAnnotated.csv(params$deAnnotated.csv)
-head(data)
+kable(head(data))
