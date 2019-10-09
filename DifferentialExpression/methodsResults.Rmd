@@ -8,11 +8,11 @@ bibliography: bibliography.ris
 link-citations: yes
 ---
 
-## Methods
+Methods
 
-1. Salmon [@Patro] to estimate relative abundance
-2. tximport [@Soneson] to import the Salmon abundance
-3. DESeq2 [@Love] to perform statistical tests to identify differentially expressed genes
+ 1. Salmon [@Patro] to estimate relative abundance
+ 2. tximport [@Soneson] to import the Salmon abundance
+ 3. DESeq2 [@Love] to perform statistical tests to identify differentially expressed genes
 
 ```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
 '''
