@@ -20,4 +20,4 @@ link-citations: yes
 
 
 data <- deAnnotated.csv(params$deAnnotated.csv)
-kable(head(data))
+kable(head(deAnnotated))
