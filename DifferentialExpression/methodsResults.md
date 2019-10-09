@@ -1,4 +1,4 @@
-Methods
+## Methods
 
 1.  Salmon (Patro et al. [2017](#ref-Patro)) to estimate relative
     abundance
