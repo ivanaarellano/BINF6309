@@ -20,6 +20,7 @@ do
     -A sam \
     -D . \
     -d AiptasiaGmapDb \
+    -s AiptasiaGmapIIT.iit \
     $PairedPath$sampleName$leftSuffix \
     $PairedPath$sampleName$rightSuffix \
     1>$SamOutPath$sampleName.sam 2>$ErrOutPath$sampleName.err
