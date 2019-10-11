@@ -3,6 +3,7 @@
 library(tximport)
 library(readr)
 library(DESeq2)
+library(knitr)
 tx2gene <- read.csv("tx2gene.csv")
 head(tx2gene)
 samples <- read.csv("Samples.csv", header=TRUE)
@@ -32,12 +33,22 @@ for (result in resultsNames(dds)){
         res <- results(dds, alpha=.05, name=result)
         dfRes <- as.data.frame(res)
         dfRes <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
+        #dfRes2 <- subset(subset(dfRes, select=c(log2FoldChange, padj)))
         dfRes$Factor <- result
-        dfAll <- rbind(dfAll, dfRes)
+        dfAll <- rbind(dfAll, dfRes)    
+        deAnnotated <- dfAll[dfAll$padj<0.05, ]
+        MergeDeAnnotated <-  merge(deAnnotated, tx2gene)
+        deAnnotated <-unique(subset(MergeDeAnnotated, select=c(trans, ko, padj, Factor)))
+        #deAnnotated <- rbind(deAnnotated, MergeDeAnnotated)
+
     }
 }
-head(dfAll)
+#head(dfAll)
+
+#kable(head(deAnnotated))
+
+
 
 
 write.csv(dfAll, file="dfAll.csv")
-
+write.csv(deAnnotated, na=" ", file="deAnnotated.csv")
