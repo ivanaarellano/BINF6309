@@ -9,7 +9,7 @@ link-citations: no
 
 # Methods
 
-1. Get refrence genome
+1. Get reference genome
 
 ```{R, code=readLines("getGenome.sh"), echo=TRUE, eval=FALSE}
 ```
