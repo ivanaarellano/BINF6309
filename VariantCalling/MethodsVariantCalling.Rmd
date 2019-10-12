@@ -4,23 +4,38 @@ Author: Ivana Arellano
 output:
   md_document:
     variant: gfm
-bibliography: bibliography.ris
-link-citations: yes
+link-citations: no
 ---
 
-### Methods
+# Methods
 
- 1. Salmon [@Patro] to estimate relative abundance
- 2. tximport [@Soneson] to import the Salmon abundance
- 3. DESeq2 [@Love] to perform statistical tests to identify differentially expressed genes
+1. Get refrence genome
 
-```{R, code=readLines("de.R"), echo=TRUE, eval=TRUE}
+```{R, code=readLines("getGenome.sh"), echo=TRUE, eval=FALSE}
 ```
 
-### Results
+2. Get NGS reads from SRA SRR6808334
 
-```{R, echo=FALSE, results = 'asis'}
-library(knitr)
-kable(head(deAnnotated), caption = "Table")
+```{R, code=readLines("getReads.sh"), echo=TRUE, eval=FALSE}
+```
+
+3. Trim the reads using Trimmomatic 
+
+```{R, code=readLines("trimReads.sh"), echo=TRUE, eval=FALSE}
+```
+
+4. Index the trimmed geneome 
+
+```{R, code=readLines("indexGenome.sh"), echo=TRUE, eval=FALSE}
+```
+
+5. Align the reads using BWA-MEM
+
+```{R, code=readLines("alignReads.sh"), echo=TRUE, eval=FALSE}
+```
+
+6. Run the DeepVariant to get VCF file 
+
+```{R, code=readLines("analyzeVariants.sh"), echo=TRUE, eval=FALSE}
 ```
 
