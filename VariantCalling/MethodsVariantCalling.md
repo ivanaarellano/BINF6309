@@ -1,6 +1,6 @@
 # Methods
 
-1.  Get refrence genome
+1.  Get reference genome
 
 <!-- end list -->
 
