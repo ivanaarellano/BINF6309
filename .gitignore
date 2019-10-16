@@ -7,5 +7,6 @@
 !*.md
 !*.ris
 *.fasta
+*.gz
 !.gitignore
 !*.ris
