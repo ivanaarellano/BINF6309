@@ -10,3 +10,10 @@
 *.gz
 !.gitignore
 !*.ris
+!APOE_refseq_transcript.fasta
+!*.html
+!*.jpg
+!*.tif
+!*.png
+
+
