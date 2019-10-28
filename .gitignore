@@ -14,6 +14,11 @@
 !*.html
 !*.jpg
 !*.tif
+!*.nex
+!*.pdf
 !*.png
+
+
+
 
 
