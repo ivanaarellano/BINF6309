@@ -1,0 +1,22 @@
+---
+Title: Moving Pictures
+Author: Ivana Arellano
+output:
+  md_document:
+    variant: gfm
+link-citations: no
+---
+
+# Methods
+
+The following commands were run on qiime2-2019.7
+
+```{R, code=readLines("moving-pictures.sh"), echo=TRUE, eval=FALSE}
+```
+
+
+~                                                                                                                 
+~                                                                                                                 
+~                                                                                                                 
+~                                                
+
