@@ -8,9 +8,9 @@ link-citations: no
 ---
 # Moving pictures and Atacama soil microbiome tutorial
 
-## Moving pcitures methods:
-
 The following commands were run on qiime2-2019.7
+
+## Moving pcitures methods:
 
 ```{R, code=readLines("moving-pictures.sh"), echo=TRUE, eval=FALSE}
 ```
