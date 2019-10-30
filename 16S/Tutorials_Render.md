@@ -179,7 +179,7 @@ qiime composition ancom \
 
 ## Moving pictures results:
 
-### These links have the demultiplexing results, metadata results, feature table data, sequence data, core metrics phylogenetic tree, taxonomy, taxa bar plots, and abundance on the gut sample.
+#### These links have the demultiplexing results, metadata results, feature table data, sequence data, core metrics phylogenetic tree, taxonomy, taxa bar plots, and abundance on the gut sample.
 
 [stats-dada2.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fstats-dada2.qzv)
 
@@ -285,7 +285,7 @@ qiime metadata tabulate \
 
 ## Atacama soil microbiome results:
 
-### These links have the demultiplexing results, table, sequences, and the sats
+#### These links have the demultiplexing results, table, sequences, and the sats
 
 [demux.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Fdemux.qzv)
 
@@ -293,4 +293,4 @@ qiime metadata tabulate \
 
 [rep-seqs.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Frep-seqs.qzv)
 
-  - [denoising-stats.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Fdenoising-stats.qzv)
+[denoising-stats.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Fdenoising-stats.qzv)
