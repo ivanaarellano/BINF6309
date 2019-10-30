@@ -1,6 +1,6 @@
-## Moving pictures and Atacama soil microbiome tutorial
+# Moving pictures and Atacama soil microbiome tutorial
 
-# Moving pcitures methods:
+## Moving pcitures methods:
 
 The following commands were run on qiime2-2019.7
 
@@ -177,9 +177,45 @@ qiime composition ancom \
   --o-visualization l6-ancom-subject.qzv
 ```
 
-# Moving pictures results:
+## Moving pictures results:
 
-# Atacama soil microbiome methods:
+### These links have the demultiplexing results, metadata results, feature table data, sequence data, core metrics phylogenetic tree, taxonomy, taxa bar plots, and abundance on the gut sample.
+
+[stats-dada2.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fstats-dada2.qzv)
+
+[table.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Ftable.qzv)
+
+[rep-seqs.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Frep-seqs.qzv)
+
+[core-metrics-results/unweighted\_unifrac\_emperor.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted_unifrac_emperor.qzv)
+
+[core-metrics-results/jaccard\_emperor.qzv](core-metrics-results/jaccard_emperor.qzv)
+
+[core-metrics-results/bray\_curtis\_emperor.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Fbray_curtis_emperor.qzv)
+
+[core-metrics-results/weighted\_unifrac\_emperor.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Fweighted_unifrac_emperor.qzv)
+
+[core-metrics-results/faith-pd-group-significance.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Ffaith-pd-group-significance.qzv)
+
+[core-metrics-results/evenness-group-significance.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Fevenness-group-significance.qzv)
+
+[core-metrics-results/unweighted-unifrac-body-site-significance.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted-unifrac-body-site-significance.qzv)
+
+[core-metrics-results/unweighted-unifrac-subject-group-significance.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted-unifrac-subject-group-significance.qzv)
+
+[core-metrics-results/bray-curtis-emperor-days-since-experiment-start.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Fbray-curtis-emperor-days-since-experiment-start.qzv)
+
+[core-metrics-results/unweighted-unifrac-emperor-days-since-experiment-start.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fcore-metrics-results%2Funweighted-unifrac-emperor-days-since-experiment-start.qzv)
+
+[taxonomy.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Ftaxonomy.qzv)
+
+[taxa-bar-plots.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Ftaxa-bar-plots.qzv)
+
+[ancom-subject.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fancom-subject.qzv)
+
+[l6-ancom-subject.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fmoving-pictures%2Fl6-ancom-subject.qzv)
+
+## Atacama soil microbiome methods:
 
 ``` r
 #!/usr/bin/env bash
@@ -247,6 +283,14 @@ qiime metadata tabulate \
   --o-visualization denoising-stats.qzv
 ```
 
-# Atacama soil microbiome results:
+## Atacama soil microbiome results:
 
-  - \*[stats](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Fdenoising-stats.qzv)
+### These links have the demultiplexing results, table, sequences, and the sats
+
+[demux.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Fdemux.qzv)
+
+[table.qzv](https://docs.qiime2.org/2019.7/tutorials/atacama-soils/)
+
+[rep-seqs.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Frep-seqs.qzv)
+
+  - [denoising-stats.qzv](https://view.qiime2.org/visualization/?type=html&src=https%3A%2F%2Fdocs.qiime2.org%2F2019.7%2Fdata%2Ftutorials%2Fatacama-soils%2Fdenoising-stats.qzv)
