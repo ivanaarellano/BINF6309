@@ -1,8 +1,8 @@
 # Moving pictures and Atacama soil microbiome tutorial
 
-## Moving pcitures methods:
-
 The following commands were run on qiime2-2019.7
+
+## Moving pcitures methods:
 
 ``` r
 #!/usr/bin/env bash
