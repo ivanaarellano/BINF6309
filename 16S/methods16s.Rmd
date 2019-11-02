@@ -48,7 +48,7 @@ option 1:
 
 ## Moving pictures results:
 
-
+The abudance of the different phyla, as well as the frequency of the taxaanomic level 
 
 
 ## Atacama soil microbiome methods:
@@ -74,4 +74,4 @@ option 1:
 ## Atacama soil microbiome results:
 
 
-
+The atacamo soil microbme results show the abundance of frequency and where they are as well as which is the domiant phyla
