@@ -1,12 +1,11 @@
 ---
 Title: Lung Metagenomic Analysis
-Author: Ivana Arellano
-output: github_doctument
+Author: Ivana Arellano:
   md_document:
     variant: gfm
 ---
 
-```{R, setup, include=FALSE}
+```{R, setup, include=FALSE} 
 knitr::opts_chunk$set(echo=TRUE)
 ```
 
