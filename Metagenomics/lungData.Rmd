@@ -1,6 +1,6 @@
 ---
 Title: Lung Metagenomic Analysis
-Author: Ivana Arellano:
+Author: Ivana Arellano
   md_document:
     variant: gfm
 ---
