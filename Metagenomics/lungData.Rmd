@@ -1,0 +1,209 @@
+---
+Title: Lung Metagenomic Analysis
+Author: Ivana Arellano
+output: github_doctument
+  md_document:
+    variant: gfm
+---
+
+```{R, setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+# 1 Introduction
+
+```{R, message=FALSE, warning=FALSE}
+
+
+```
+
+# 2 Data preparation 
+## 2.1 Biom-Format
+## 2.2 Loadingcountdata
+## 2.3 Loadingtaxonomy  
+## 2.4 Loadingmetadata
+## 2.5 CreatingaMRexperimentobject
+## 2.6 Exampledatasets 
+## 2.7 Usefulcommands
+
+```{R, message=FALSE, warning=FALSE}
+
+dataDirectory <- system.file("extdata", package = "metagenomeSeq")
+lung = loadMeta(file.path(dataDirectory, "CHK_NAME.otus.count.csv"))
+dim(lung$counts) #loads the extdata form the metagenome seq in a taxa tab list
+
+taxa = read.delim(file.path(dataDirectory, "CHK_otus.taxonomy.csv"), stringsAsFactors = FALSE) #Loads taxonomy data
+
+clin = loadPhenoData(file.path(dataDirectory, "CHK_clinical.csv"), tran = TRUE)
+ord = match(colnames(lung$counts), rownames(clin))
+clin = clin[ord, ] #Load data as a list 
+head(clin[1:2, ])
+
+phenotypeData = AnnotatedDataFrame(clin) #Use pheoData to make an annotated data frames  
+phenotypeData
+OTUdata = AnnotatedDataFrame(taxa) #annotmates at different taxa levels
+OTUdata
+obj = newMRexperiment(lung$counts,phenoData=phenotypeData,featureData=OTUdata) #gets info from paper 
+obj
+
+
+data(lungData) #takes samples from 3 smoker and 3 non-smoker subjects 
+lungData
+
+
+phenoData(obj) #Look at phenotype of objects
+head(pData(obj), 3) # look at the first three objecs
+featureData(obj) # look at feature info using feature Data
+head(MRcounts(obj[, 1:2])) # normalized or raw matrix can be seen the MRcounts
+featuresToKeep = which(rowSums(obj) >= 100) # fliter objects 
+samplesToKeep = which(pData(obj)$SmokingStatus == "Smoker")
+obj_smokers = obj[featuresToKeep, samplesToKeep]
+obj_smokers
+head(pData(obj_smokers), 3) 
+head(normFactors(obj)) # can normalize scaling factors usng normFactors function
+normFactors(obj) <- rnorm(ncol(obj))
+head(normFactors(obj))
+head(libSize(obj)) # determine sequencing depths using libSize 
+libSize(obj) <- rnorm(ncol(obj))
+head(libSize(obj))
+
+```
+
+
+# 3 Normalization
+## 3.1 Calculatingnormalizationfactors
+## 3.1.1 Calculating normalization factors using Wrench
+## 3.2 Exportingdata
+
+```{R, message=FALSE, warning=FALSE}
+
+data(lungData)
+p = cumNormStatFast(lungData) # calculate what "normal percentile" is
+lungData = cumNorm(lungData, p = p)
+
+mat = MRcounts(lungData, norm = TRUE, log = TRUE)[1:5, 1:5] #Exports normalized matrices
+exportMat(mat, file = file.path(dataDirectory, "tmp.tsv")) #save sample stats
+exportStats(lungData[, 1:5], file = file.path(dataDirectory, "tmp.tsv"))
+
+```
+
+# 4 Statistical testing 
+## 4.1 Zero-inflated Log-Normal mixture model for each feature
+## 4.1.1 Example using fitFeatureModel for differential abundance testing
+## 4.2 Zero-inflatedGaussianmixturemodel
+## 4.2.1 Example using fitZig for differential abundance testing
+## 4.2.2 Multiplegroups
+## 4.2.3 Exportingfits
+## 4.3 Timeseriesanalysis
+## 4.4 LogNormalpermutationtest
+## 4.5 Presence-absencetesting
+## 4.6 Discoveryoddsratiotesting
+## 4.7 Featurecorrelations
+## 4.8 UniqueOTUsorfeatures
+
+```{R, message=FALSE, warning=FALSE}
+
+data(lungData) #compares somkers and non-smokers lung microbimoe
+lungData = lungData[, -which(is.na(pData(lungData)$SmokingStatus))]
+lungData = filterData(lungData, present = 30, depth = 1)
+lungData <- cumNorm(lungData, p = 0.5)
+pd <- pData(lungData)
+mod <- model.matrix(~1 + SmokingStatus, data = pd)
+lungres1 = fitFeatureModel(lungData, mod)
+head(MRcoefs(lungres1))
+
+data(lungData) #uses fitZig for abundance testing
+controls = grep("Extraction.Control", pData(lungData)$SampleType)
+lungTrim = lungData[, -controls] #remove features that are not present and calculate normal 
+rareFeatures = which(rowSums(MRcounts(lungTrim) > 0) < 10) 
+lungTrim = lungTrim[-rareFeatures, ]
+lungp = cumNormStat(lungTrim, pFlag = TRUE, main = "Trimmed lung data")
+lungTrim = cumNorm(lungTrim, p = lungp)
+smokingStatus = pData(lungTrim)$SmokingStatus
+bodySite = pData(lungTrim)$SampleType
+normFactor = normFactors(lungTrim)
+normFactor = log2(normFactor/median(normFactor) + 1)
+mod = model.matrix(~smokingStatus + bodySite + normFactor) #uses body site for varience
+settings = zigControl(maxit = 10, verbose = TRUE)
+fit = fitZig(obj = lungTrim, mod = mod, useCSSoffset = FALSE, control = settings)
+settings = zigControl(maxit = 1, verbose = FALSE)
+mod = model.matrix(~bodySite)
+colnames(mod) = levels(bodySite)
+res = fitZig(obj = lungTrim, mod = mod, control = settings)
+zigFit = slot(res, "fit")
+finalMod = slot(res, "fit")$design
+contrast.matrix = makeContrasts(BAL.A - BAL.B, OW - PSB, levels = finalMod)
+fit2 = contrasts.fit(zigFit, contrast.matrix)
+fit2 = eBayes(fit2)
+topTable(fit2)
+
+taxa = sapply(strsplit(as.character(fData(lungTrim)$taxa), split = ";"), function(i) {
+i[length(i)] }) 
+
+head(MRcoefs(fit, taxa = taxa, coef = 2)) # looks at coefficent fits and exports data
+
+#nothing for 4.3
+
+coeffOfInterest = 2 # make a list of significant features
+res = fitLogNormal(obj = lungTrim, mod = mod, useCSSoffset = FALSE, 
+    B = 10, coef = coeffOfInterest) # 10 permutations used 
+adjustedPvalues = p.adjust(res$p, method = "fdr")
+foldChange = abs(res$fit$coef[, coeffOfInterest])
+sigList = which(adjustedPvalues <= 0.05)
+sigList = sigList[order(foldChange[sigList])]
+head(taxa[sigList])
+
+#4.5 is mouse data
+#4.6 is mouse data
+#4.7 is mouse data
+#4.8 is mouse data
+
+```
+
+# 5 Aggregating counts
+
+```{R, message=FALSE, warning=FALSE}
+
+#5 is mouse data
+
+```
+
+# 6 Visualization of features
+## 6.1 InteractiveDisplay 
+## 6.2 Structuraloverv
+## 6.3 Featurespecific
+
+```{R, message=FALSE, warning=FALSE}
+
+#6.1 is mouse data
+#6.2 is mouse data
+
+head(MRtable(fit, coef = 2, taxa = 1:length(fData(lungTrim)$taxa))) # prevent false positves 
+patients = sapply(strsplit(rownames(pData(lungTrim)), split = "_"), function(i) {
+i[3] })
+pData(lungTrim)$patients = patients
+classIndex = list(smoker = which(pData(lungTrim)$SmokingStatus =="Smoker"))
+classIndex$nonsmoker = which(pData(lungTrim)$SmokingStatus =="NonSmoker")
+otu = 779
+plotOTU(lungTrim, otu = otu, classIndex, main = "Neisseria meningitidis") # plotOTU is used because if looks at abundances of a particular feature group
+x = fData(lungTrim)$taxa[otu]
+otulist = grep(x, fData(lungTrim)$taxa)
+plotGenus(lungTrim, otulist, classIndex, labs = FALSE, main = "Neisseria meningitidis")
+lablist <- c("S", "NS")
+axis(1, at = seq(1, 6, by = 1), labels = rep(lablist, times = 3))
+
+
+```
+
+# 7 Summary 
+## 7.1 CitingmetagenomeSeq
+## 7.2 SessionInfo
+
+```{R, message=FALSE, warning=FALSE}
+citation("metagenomeSeq")
+
+sessionInfo()
+
+```
+
+# 8 Appendix 
