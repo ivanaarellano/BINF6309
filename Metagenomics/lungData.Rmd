@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo=TRUE)
 ## 2.7 Usefulcommands
 
 ```{R, message=FALSE, warning=FALSE}
-
+library(metagenomeSeq)
 dataDirectory <- system.file("extdata", package = "metagenomeSeq")
 lung = loadMeta(file.path(dataDirectory, "CHK_NAME.otus.count.csv"))
 dim(lung$counts) #loads the extdata form the metagenome seq in a taxa tab list
@@ -46,10 +46,8 @@ OTUdata
 obj = newMRexperiment(lung$counts,phenoData=phenotypeData,featureData=OTUdata) #gets info from paper 
 obj
 
-
 data(lungData) #takes samples from 3 smoker and 3 non-smoker subjects 
 lungData
-
 
 phenoData(obj) #Look at phenotype of objects
 head(pData(obj), 3) # look at the first three objecs
@@ -66,7 +64,6 @@ head(normFactors(obj))
 head(libSize(obj)) # determine sequencing depths using libSize 
 libSize(obj) <- rnorm(ncol(obj))
 head(libSize(obj))
-
 ```
 
 
@@ -76,7 +73,7 @@ head(libSize(obj))
 ## 3.2 Exportingdata
 
 ```{R, message=FALSE, warning=FALSE}
-
+library(metagenomeSeq)
 data(lungData)
 p = cumNormStatFast(lungData) # calculate what "normal percentile" is
 lungData = cumNorm(lungData, p = p)
@@ -102,7 +99,7 @@ exportStats(lungData[, 1:5], file = file.path(dataDirectory, "tmp.tsv"))
 ## 4.8 UniqueOTUsorfeatures
 
 ```{R, message=FALSE, warning=FALSE}
-
+library(metagenomeSeq)
 data(lungData) #compares somkers and non-smokers lung microbimoe
 lungData = lungData[, -which(is.na(pData(lungData)$SmokingStatus))]
 lungData = filterData(lungData, present = 30, depth = 1)
@@ -174,7 +171,7 @@ head(taxa[sigList])
 ## 6.3 Featurespecific
 
 ```{R, message=FALSE, warning=FALSE}
-
+library(metagenomeSeq)
 #6.1 is mouse data
 #6.2 is mouse data
 
@@ -200,6 +197,7 @@ axis(1, at = seq(1, 6, by = 1), labels = rep(lablist, times = 3))
 ## 7.2 SessionInfo
 
 ```{R, message=FALSE, warning=FALSE}
+library(metagenomeSeq)
 citation("metagenomeSeq")
 
 sessionInfo()
