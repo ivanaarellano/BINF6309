@@ -1,0 +1,254 @@
+---
+title: "runPlink.Rmd"
+output: html_document
+bibliography: bibliography.ris
+link-citations: yes
+---
+
+# PLINK Tutorial [@Purcell]
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analyze random genotypes from HapMaps using PLINK [@Purcell]
+
+## Check file is intact
+
+```{bash,eval=FALSE}
+plink --file hapmap1
+```
+
+## Make binary PED file
+
+```{bash,eval=FALSE}
+plink --file hapmap1 --make-bed --out hapmap1
+```
+
+## add --mind 0.05 as an option to only include subjects with 95% genotyping
+
+```{bash,eval=FALSE}
+plink --file hapmap1 --make-bed --mind 0.05 --out highgeno
+```
+
+## add -bfile so that it knows input is binary and not PED or MAP format 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1
+```
+
+## run stats on the rate of missing data 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --missing --out miss_stat
+```
+
+## stats on per indivual missing data
+
+```{bash, echo=FALSE}
+head miss_stat.lmiss
+```
+
+## stats on per SNP missing data
+
+```{bash, echo=FALSE}
+head miss_stat.imiss
+```
+
+## analzye data by chromosome (1 and 2)
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --chr 1 --out res1 --missing
+plink --bfile hapmap1 --chr 2 --out res2 --missing
+```
+
+## analysis on allele frequency within the population 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --freq --out freq_stat
+plink --bfile hapmap1 --freq --within pop.phe --out freq_stat
+```
+
+```{bash, echo=FALSE}
+head freq_stat.frq.strat
+```
+
+## look within a particular SNP in the two populations 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --snp rs1891905 --freq --within pop.phe --out snp1_frq_stat
+```
+
+## Association analysis on the trait for each SNP and sort
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --assoc --out as1
+```
+
+```{bash, echo=FALSE}
+head as1.assoc
+```
+
+```{bash, echo=FALSE}
+sort --key=7 -nr as1.assoc | head
+```
+
+## Include the significance using --adjust
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --assoc --adjust --out as2
+```
+
+```{bash, echo=FALSE}
+head as2.assoc.adjusted
+```
+
+## look at inflation factor by repalcing disease phenotype with one from the populaiton 
+
+```{bash, echo=FALSE}
+plink --bfile hapmap1 --pheno pop.phe --assoc --adjust --out as3
+```
+
+## calculate stats based on 2x3 table and alleic test followed by Cochran-Armitage trend using --model. Change the cell option to 0
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --model --snp rs2222162 --out mod1
+plink --bfile hapmap1 --model --cell 0 --snp rs2222162 --out mod2
+```
+
+```{bash, echo=FALSE}
+head mod1.model
+```
+
+```{bash, echo=FALSE}
+head mod2.model
+```
+
+## Cluster the individuals based on whole genome data into homogeneous groups, genetic idenity of p =0.05 in clusters of 2
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --cluster --mc 2 --ppc 0.05 --out str1
+```
+
+```{bash, echo=FALSE}
+head str1.cluster1
+```
+
+## use CMH association stats to look at SNP association based on clustering
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --mh --within str1.cluster2 --adjust --out aac1
+```
+
+```{bash, echo=FALSE}
+head aac1.cmh.adjusted
+```
+
+## Use clustering of one disease and one control p=0.01
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --cluster --cc --ppc 0.01 --out version2
+```
+
+## repeat association analysis with new clustering
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --mh --within version2.cluster2 --adjust --out aac2
+```
+
+```{bash, echo=FALSE}
+head aac2.cmh
+```
+
+```{bash, echo=FALSE}
+head version2.cluster1
+```
+
+## K option to make two clusters and remove significance 
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --cluster --K 2 --out version3
+```
+
+```{bash, echo=FALSE}
+head version3.cluster1
+```
+
+## use external clustering for analysis 
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --mh --within pop.phe --adjust --out aac3
+```
+
+## Create a matirx of pairwaise IBS and make plots
+
+```{bash, eval=FALSE}
+plink --bfile hapmap1 --cluster --matrix --out ibd_view
+
+```
+
+## Plot shows two disticnt clusters 
+
+```{R}
+m <-as.matrix(read.table("ibd_view.mibs"))
+mds <- cmdscale(as.dist(1-m))
+k <- c( rep("green",45) , rep("blue",44) )
+plot(mds,pch=20,col=k)
+
+d <- read.table("rec_snp1.raw" , header=T)
+summary(glm(PHENOTYPE-1 ~ rs2222162_1, data=d, family="binomial"))
+
+```
+
+## Use quantitative trait for association analysis to look at least sequres regression 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --assoc --pheno qt.phe --out quant1
+```
+
+```{bash, echo=FALSE}
+head quant1.qassoc
+```
+
+## Control between cluster associations by adding permutations
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --assoc --pheno qt.phe --perm --within str1.cluster2 --out quant2
+```
+
+```{bash, echo=FALSE}
+head quant2.qassoc.perm 
+```
+
+## Test if associations is different between two populations 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --assoc --pheno qt.phe --mperm 1000 --within str1.cluster2 --out quant3
+```
+
+## Test to see if phenotype is diffrent 
+
+```{bash, echo=FALSE}
+head quant3.qassoc.gxe
+```
+
+## Look at a particualr SNP area by extracting that data  and check for covarience 
+
+```{bash,eval=FALSE}
+plink --bfile hapmap1 --pheno qt.phe --gxe --covar pop.phe --snp rs2222162 --out quant3
+plink --bfile hapmap1 --snp rs2222162 --recodeAD --out rec_snp1
+
+```
+
+## Repeat regression analysis on particualr SNP 
+
+```{R}
+d <- read.table("rec_snp1.raw" , header=T)
+summary(glm(PHENOTYPE-1 ~ rs2222162_1, data=d, family="binomial"))
+```
+
+# Summary 
+
+This table shows that single SNP rs2222162 is significantlly different in the diseased population which confirms original analysis this table does not take into acoount clustering.
+
+# References
