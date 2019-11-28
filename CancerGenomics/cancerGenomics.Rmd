@@ -1,0 +1,162 @@
+---
+title: "cancerGenomics.Rmd"
+output: html_document
+bibliography: bibliography.ris
+link-citations: yes
+---
+# maftools : Summarize, Analyze and Visualize MAF Files [@MAF]
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# 6. Reading and summarizing maf files
+
+## read MAF files and summerizes in different ways as well as making MAF an object.
+
+```{r}
+library(maftools)
+clinical_data = read.table("tcga_laml_annot.tsv", sep="\t", header = TRUE) #read in metadata
+laml_maf = read.maf(maf = "tcga_laml.maf", clinicalData = clinical_data) #create a MAF object
+laml_df = subsetMaf(laml_maf, mafObj=FALSE) #creates a data.frame of laml.maf - this can be viewed as a table 
+APL_prim = read.table("APL_primary.maf.gz", sep="\t", header = TRUE) #read 
+APL_relap = read.table("APL_relapse.maf.gz", sep="\t", header = TRUE) #read 
+laml_annot= read.table("tcga_laml_annot.tsv", sep="\t", header = TRUE) #read 
+LAML_sig = read.table("LAML_sig_genes.txt.gz", sep="\t", header = TRUE) #read 
+laml_maf #Summary of laml_maf file
+getSampleSummary(laml_maf) #Sample summary
+getGeneSummary(laml_maf) #Gene summary
+getFields(laml_maf) #Shows all fiedls in maf file
+write.mafSummary(maf= laml_maf, basename = "laml_maf") #makes an output file of the laml_maf basename
+
+```
+
+# 7. Visualization 
+
+## Plots the summary of the MAF file in several ways such as boxplot by variant class, barplot of eah sample. Oncoplots shows all samples and what genes are altered. Oncostrip shows the percent of mutatations in each gene in all the samples. Transitions and transversions can be looked at boxplots and percent mutations. Lollipop plots show mutation areas of the proteins at particular hotspots. Rainfall plots show hyper mutated regions using inter variant distance. Now compare mutations to 30 different TCGA cancer cohorts. Plotting the variant allele frequencies shows the top mutated genes that have 50% allele frequency. A genecloud plot show the top mutated gene.
+
+```{r}
+plotmafSummary(maf = laml_maf, rmOutlier = TRUE, addStat = 'median', dashboard = TRUE, titvRaw = FALSE) #plots the laml_maf summary file 
+oncoplot(maf = laml_maf, top = 10) #plots top n=10 mutated genes
+oncostrip(maf= laml_maf, genes = c('DNMT3A', 'NPM1', 'RUNX1')) #plots specific genes
+laml.titv =  titv(maf =laml_maf, plot = FALSE, useSyn = TRUE) #seperates SNPS into transitions and transversions then produces a table with the summary
+plotTiTv(res = laml.titv) #plots titv file 
+lollipopPlot(maf = laml_maf, gene = 'DNMT3A', AACol = 'Protein_Change', showMutationRate = TRUE) #plots mutation spots on protien strucures using the AACol input 
+lollipopPlot(maf=laml_maf, gene= 'KIT', AACol = 'Protein_Change', labelPos=816, refSeqID = 'NM_000222') #look at a label positon 816
+brca <- system.file('extdata', 'brca.maf.gz', package = "maftools")
+brca = read.maf(maf = brca, verbose = FALSE)
+rainfallPlot(maf=brca, detectChangePoints = TRUE, pointSize = 0.6) #plots hypermutated genomic regions and higlights areas that may change inter-event distance
+laml_mutload= tcgaCompare(maf = laml_maf, cohortName= 'Example-LAML') #Compares mutation load to input MAF file 
+
+```
+# 7. continued 
+```{r}
+plotVaf(maf = laml_maf, vafCol = 'i_TumorVAF_WU') #Plots variant allele frequency to calculate the clonal status of the top mutated genes 
+geneCloud(input = laml_maf, minMut = 3) #Makes a word cloud withthe mutated genes with a minimum number of 3 samples the gene is mutated 
+
+
+```
+
+# 8. Processing copy-number data
+
+## Now read and summarize the GISTIC files using a genome plot, bubble plot, and an oncoplot. Then look at CBS segments 
+```{r}
+#summarize output from the GISTIC programe 
+all.lesions <- system.file("extdata", "all_lesions.conf_99.txt", package = "maftools")
+amp.genes <- system.file("extdata", "amp_genes.conf_99.txt", package = "maftools")
+del.genes <- system.file("extdata", "del_genes.conf_99.txt", package = "maftools")
+scores.gis <- system.file("extdata", "scores.gistic", package = "maftools")
+laml.gistic = readGistic(gisticAllLesionsFile = all.lesions, gisticAmpGenesFile = amp.genes, gisticDelGenesFile = del.genes, gisticScoresFile = scores.gis, isTCGA = TRUE)
+laml.gistic #GISTIC object 
+gisticChromPlot(gistic = laml.gistic, markBands = "all") #plots GISTIC data 
+gisticBubblePlot(gistic = laml.gistic) # plots as GISTIC data as a bubble plot
+gisticOncoPlot(gistic = laml.gistic, clinicalData = getClinicalData(x = laml_maf), clinicalFeatures = 'FAB_classification', sortByAnnotation = TRUE, top = 10) # plots GISTIC as onoplots 
+tcga.ab.009.seg <- system.file("extdata", "TCGA.AB.3009.hg19.seg.txt", package = "maftools")
+plotCBSsegments(cbsFile = tcga.ab.009.seg) #plots CBS segments 
+```
+# 9. Analysis [@Cluster]
+
+## Now we can perform analysis. First look at sommatic interactions of the top 25 genes. Now detect cancer driver genes by looking at postional clusters. Now add pfam domains to the amino acid changes. Now, compare to the 21 cancer cohorts with ~200 genes with mutated significant results. Then predict the survivial genes by removing those with poor survivial. After, compare the two maf cohorts, primary and relpase to see if and what genes were altered. Then, make forest plots of PML and RAR genes. These genes had many mutations in the replapse cohort. Anohter way to show this data is by plotting co-onco plots side by side of the two cohorts of the top genes. For more detail plot a lollipop plot-2. Now, perform a clinical enrichment analysis. This looks at clinical features that are associated with samples. This shows enriched mutations in muliple categories. Then, look at the drug gene interactions to see the druggability based on the drug gene interaction database. Now, look at the oncogenic pathways in the TCGA cohorts. Display the complete patways for a better understanding. Finally look at mutations signatures/pattern of neuclotide subsitutions. These signatures are then compared to validated signatures. Do do this first extract the adjacent bases of the mutated base to make a mutation matrix. Then estimate the APOBEC enrichement scores. Now, look at the differences between APOBEC and non-enriched. Finally, performe signature analysis. To do this, estimate the signatures, find the optimal number of signatures, extract them, compare to the known signatures, and plot them.
+
+```{r}
+library(devtools)
+library(maftools)
+somaticInteractions(maf = laml_maf, top = 25, pvalue = c(0.05, 0.1)) #performs somatic interaction analysis to see if mutation is mutally exclusive or co-occuring using the pair-wise Fisher's Exact test 
+laml.sig = oncodrive(maf = laml_maf, AACol = 'Protein_Change', minMut = 5, pvalMethod = 'zscore')
+head(laml.sig) # Finds driver cancer genes from MAF file, usually in certain "hot spots" 
+```
+
+```{r}
+plotOncodrive(res = laml.sig, fdrCutOff = 0.1, useFraction = TRUE) #plot Oncodrive clusters depending on the cluster size
+laml.pfam = pfamDomains(maf = laml_maf, AACol = 'Protein_Change', top = 10) #pfamDomains adds domain informaiton to amino acid changes and summarizes acording to affected doamins
+laml.pfam$proteinSummary[,1:7, with = FALSE] #shows the domain labe of with frequent mutations 
+laml.mutsig <- system.file("extdata", "LAML_sig_genes.txt.gz", package = "maftools")  
+pancanComparison(mutsigResults = laml.mutsig, qval = 0.1, cohortName = 'LAML', inputSampleSize = 200, label = 1) #compare mutSig results with pan=can list
+mafSurvival(maf = laml_maf, genes = 'DNMT3A', time = 'days_to_last_followup', Status = 'Overall_Survival_Status', isTCGA = TRUE) #surviival analysis and draws curve based on sample grouping mutaiton status 
+```
+
+```{r}
+prog_geneset = survGroup(maf = laml_maf, top = 20, geneSetSize = 2, time = "days_to_last_followup", Status = "Overall_Survival_Status", verbose = FALSE) #Finds genes that have poor survival (top 20 of size 2)
+print(prog_geneset) #prints poor survivial genes (11)
+mafSurvGroup(maf = laml_maf, geneSet = c("DNMT3A", "FLT3"), time = "days_to_last_followup", Status = "Overall_Survival_Status") #surviival analysis and draws curve based on sample grouping mutaiton status without 11 genes
+primary.apl = system.file("extdata", "APL_primary.maf.gz", package = "maftools") 
+primary.apl = read.maf(maf = primary.apl)
+relapse.apl = system.file("extdata", "APL_relapse.maf.gz", package = "maftools")
+relapse.apl = read.maf(maf = relapse.apl)
+```
+
+```{r}
+pt.vs.rt <- mafCompare(m1 = primary.apl, m2 = relapse.apl, m1Name = 'Primary', m2Name = 'Relapse', minMut = 5)
+print(pt.vs.rt) #Compares primary vs relpased to see if there is any differentially mutated genes by performing fisher test on the the differentially mutated genes from both groups 
+```
+
+```{r}
+#par(mar=c(1,1,1,1))
+forestPlot(mafCompareRes = pt.vs.rt, pVal = 0.1, color = c('royalblue', 'maroon'), geneFontSize = 0.8)
+```
+
+```{r}
+genes = c("PML", "RARA", "RUNX1", "ARID1B", "FLT3")
+```
+
+```{r}
+coOncoplot(m1 = primary.apl, m2 = relapse.apl, m1Name = 'PrimaryAPL', m2Name = 'RelapseAPL', genes = genes, removeNonMutated = TRUE) #plot the two coOncoplots side by side with the same genes 
+lollipopPlot2(m1 = primary.apl, m2 = relapse.apl, gene = "PML", AACol1 = "amino_acid_change", AACol2 = "amino_acid_change", m1_name = "Primary", m2_name = "Relapse") #show the differences in a particualr gene using a lolipopPlot2
+```
+
+```{r}
+fab.ce = clinicalEnrichment(maf = laml_maf, clinicalFeature = 'FAB_classification') #enrichment analysis of a clinical feature in this case 'FAB_classification"
+fab.ce$groupwise_comparision[p_value < 0.05] # Tavbe of significant gene mutations  
+plotEnrichmentResults(enrich_res = fab.ce, pVal = 0.05) #plots enrichment results 
+dgi = drugInteractions(maf = laml_maf, fontSize = 0.75) # looks for gene-drug interaction from the drug gene interaction database 
+dnmt3a.dgi = drugInteractions(genes = "DNMT3A", drugs = TRUE) # known or reported drugs that interact with DNMT3A gene
+dnmt3a.dgi[,.(Gene, interaction_types, drug_name, drug_claim_name)] # print these columns 
+OncogenicPathways(maf = laml_maf) #looks for enrichment of Oncogenic Signalling Pathways in TCGA
+PlotOncogenicPathways(maf = laml_maf, pathways = "RTK-RAS") #look at entire pathway 
+library(BSgenome.Hsapiens.UCSC.hg19, quietly = TRUE) #get bases arouned mutated base and make matrix 
+laml.tnm = trinucleotideMatrix(maf = laml_maf, prefix = 'chr', add = TRUE, ref_genome = "BSgenome.Hsapiens.UCSC.hg19") #Estimates APOBEC enrichment scores and makes matrix for signature analysis 
+
+```
+
+```{r}
+plotApobecDiff(tnm = laml.tnm, maf = laml_maf, pVal = 0.2) #Plots samples into APOBEC and non APOBEC and compares different genes 
+library('NMF') #load NMF library
+laml.sign = estimateSignatures(mat = laml.tnm, pConstant = 0.1, nTry = 4) #Estimate signatures
+```
+
+
+```{r}
+plotCophenetic(res = laml.sign) #Elbow bolot to see optimal number og signatures
+laml.sig = extractSignatures(mat = laml.tnm, n = 3, pConstant = 0.1)
+laml.og30.cosm = compareSignatures(nmfRes = laml.sig, sig_db = "legacy") #compare with original 30 signatures
+laml.v3.cosm = compareSignatures(nmfRes = laml.sig, sig_db = "SBS") #compare with 60 signatures
+library('pheatmap') #load pheatmap
+pheatmap::pheatmap(mat = laml.og30.cosm$cosine_similarities, cluster_rows = FALSE, main = "cosine similarity against validated signatures") #compares simillarities of signatures with confirmed signatures 
+maftools::plotSignatures(nmfRes = laml.sig, title_size = 0.8) #Plot signatures
+laml.se = signatureEnrichment(maf = laml_maf, sig_res = laml.sig) # Assign to sample and perform enrichment analysis that looks at muatations that are enriched at every signature 
+plotEnrichmentResults(enrich_res = laml.se, pVal = 0.05) #Plot enrichment results
+```
+
+# Reference 
+
