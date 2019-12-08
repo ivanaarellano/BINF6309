@@ -1,13 +1,7 @@
 ---
+title: "bibliography"
 Author: Ivana Arellano
-output:
-  html_document:
-    toc: true
-    toc_depth: 4
-    toc_float: true
-    dev: 'svg'
-  md_document:
-    variant: gfm
+output: md_document
 bibliography: bibliography.ris
 link-citations: yes
 ---
