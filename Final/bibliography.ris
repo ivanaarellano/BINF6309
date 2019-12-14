@@ -1,0 +1,428 @@
+TY  - JOUR
+ID  - 16s
+T1  - Using QIIME to Analyze 16S rRNA Gene Sequences from Microbial Communities
+AU  - Kuczynski, Justin
+AU  - Stombaugh, Jesse
+AU  - Walters, William Anton
+AU  - González, Antonio
+AU  - Caporaso, J. Gregory
+AU  - Knight, Rob
+Y1  - 2011/12/01
+PY  - 2011
+DA  - 2011/12/01
+N1  - doi: 10.1002/0471250953.bi1007s36
+DO  - 10.1002/0471250953.bi1007s36
+T2  - Current Protocols in Bioinformatics
+JF  - Current Protocols in Bioinformatics
+JO  - Current Protocols in Bioinformatics
+JA  - Current Protocols in Bioinformatics
+SP  - 10.7.1
+EP  - 10.7.20
+VL  - 36
+IS  - 1
+KW  - microbial ecology
+KW  - 16S
+KW  - SSU
+KW  - software
+KW  - bioinformatics
+KW  - QIIME
+PB  - John Wiley & Sons, Ltd
+SN  - 1934-3396
+M3  - doi: 10.1002/0471250953.bi1007s36
+UR  - https://doi.org/10.1002/0471250953.bi1007s36
+Y2  - 2019/12/13
+N2  - Abstract QIIME (canonically pronounced ?chime?) is a software application that performs microbial community analysis. It is an acronym for Quantitative Insights Into Microbial Ecology, and has been used to analyze and interpret nucleic acid sequence data from fungal, viral, bacterial, and archaeal communities. The following protocols describe how to install QIIME on a single computer and use it to analyze microbial 16S sequence data from nine distinct microbial communities. Curr. Protoc. Bioinform. 36:10.7.1-10.7.20. ? 2011 by John Wiley & Sons, Inc.
+ER  - 
+Provider: Silverchair
+Database: Oxford University Press
+Content: text/plain; charset="UTF-8"
+
+TY  - JOUR
+ID  - BioPy
+AU  - Cock, Peter J. A.
+AU  - Antao, Tiago
+AU  - Chang, Jeffrey T.
+AU  - Chapman, Brad A.
+AU  - Cox, Cymon J.
+AU  - Dalke, Andrew
+AU  - Friedberg, Iddo
+AU  - Hamelryck, Thomas
+AU  - Kauff, Frank
+AU  - Wilczynski, Bartek
+AU  - de Hoon, Michiel J. L.
+T1  - Biopython: freely available Python tools for computational molecular biology and bioinformatics
+T2  - Bioinformatics
+PY  - 2009
+Y1  - 2009/03/20/
+DO  - 10.1093/bioinformatics/btp163
+JO  - Bioinformatics
+JA  - bioinformatics
+VL  - 25
+IS  - 11
+SP  - 1422
+EP  - 1423
+SN  - 1367-4803
+AB  - Summary: The Biopython project is a mature open source international collaboration of volunteer developers, providing Python libraries for a wide range of bioinformatics problems. Biopython includes modules for reading and writing different sequence file formats and multiple sequence alignments, dealing with 3D macro molecular structures, interacting with common tools such as BLAST, ClustalW and EMBOSS, accessing key online databases, as well as providing numerical methods for statistical learning.Availability: Biopython is freely available, with documentation and source code at www.biopython.org under the Biopython license.Contact: All queries should be directed to the Biopython mailing lists, see www.biopython.org/wiki/_Mailing_listspeter.cock@scri.ac.uk.
+Y2  - 12/14/2019
+UR  - https://doi.org/10.1093/bioinformatics/btp163
+ER  - 
+
+
+TY  - JOUR
+ID  - Cancer
+DB  - PubMed
+AU  - Cancer Genome Atlas Research Network
+AU  - Ley, Timothy J
+AU  - Miller, Christopher
+AU  - Ding, Li
+AU  - Raphael, Benjamin J
+AU  - Mungall, Andrew J
+AU  - Robertson, A Gordon
+AU  - Hoadley, Katherine
+AU  - Triche, Timothy J, Jr
+AU  - Laird, Peter W
+AU  - Baty, Jack D
+AU  - Fulton, Lucinda L
+AU  - Fulton, Robert
+AU  - Heath, Sharon E
+AU  - Kalicki-Veizer, Joelle
+AU  - Kandoth, Cyriac
+AU  - Klco, Jeffery M
+AU  - Koboldt, Daniel C
+AU  - Kanchi, Krishna-Latha
+AU  - Kulkarni, Shashikant
+AU  - Lamprecht, Tamara L
+AU  - Larson, David E
+AU  - Lin, Ling
+AU  - Lu, Charles
+AU  - McLellan, Michael D
+AU  - McMichael, Joshua F
+AU  - Payton, Jacqueline
+AU  - Schmidt, Heather
+AU  - Spencer, David H
+AU  - Tomasson, Michael H
+AU  - Wallis, John W
+AU  - Wartman, Lukas D
+AU  - Watson, Mark A
+AU  - Welch, John
+AU  - Wendl, Michael C
+AU  - Ally, Adrian
+AU  - Balasundaram, Miruna
+AU  - Birol, Inanc
+AU  - Butterfield, Yaron
+AU  - Chiu, Readman
+AU  - Chu, Andy
+AU  - Chuah, Eric
+AU  - Chun, Hye-Jung
+AU  - Corbett, Richard
+AU  - Dhalla, Noreen
+AU  - Guin, Ranabir
+AU  - He, An
+AU  - Hirst, Carrie
+AU  - Hirst, Martin
+AU  - Holt, Robert A
+AU  - Jones, Steven
+AU  - Karsan, Aly
+AU  - Lee, Darlene
+AU  - Li, Haiyan I
+AU  - Marra, Marco A
+AU  - Mayo, Michael
+AU  - Moore, Richard A
+AU  - Mungall, Karen
+AU  - Parker, Jeremy
+AU  - Pleasance, Erin
+AU  - Plettner, Patrick
+AU  - Schein, Jacquie
+AU  - Stoll, Dominik
+AU  - Swanson, Lucas
+AU  - Tam, Angela
+AU  - Thiessen, Nina
+AU  - Varhol, Richard
+AU  - Wye, Natasja
+AU  - Zhao, Yongjun
+AU  - Gabriel, Stacey
+AU  - Getz, Gad
+AU  - Sougnez, Carrie
+AU  - Zou, Lihua
+AU  - Leiserson, Mark D M
+AU  - Vandin, Fabio
+AU  - Wu, Hsin-Ta
+AU  - Applebaum, Frederick
+AU  - Baylin, Stephen B
+AU  - Akbani, Rehan
+AU  - Broom, Bradley M
+AU  - Chen, Ken
+AU  - Motter, Thomas C
+AU  - Nguyen, Khanh
+AU  - Weinstein, John N
+AU  - Zhang, Nianziang
+AU  - Ferguson, Martin L
+AU  - Adams, Christopher
+AU  - Black, Aaron
+AU  - Bowen, Jay
+AU  - Gastier-Foster, Julie
+AU  - Grossman, Thomas
+AU  - Lichtenberg, Tara
+AU  - Wise, Lisa
+AU  - Davidsen, Tanja
+AU  - Demchok, John A
+AU  - Shaw, Kenna R Mills
+AU  - Sheth, Margi
+AU  - Sofia, Heidi J
+AU  - Yang, Liming
+AU  - Downing, James R
+AU  - Eley, Greg
+T1  - Genomic and epigenomic landscapes of adult de novo acute myeloid leukemia
+LA  - eng
+SN  - 1533-4406
+SN  - 0028-4793
+Y1  - 2013/05/30
+ET  - 2013/05/01
+AB  - BACKGROUND: Many mutations that contribute to the pathogenesis of acute myeloid leukemia (AML) are undefined. The relationships between patterns of mutations and epigenetic phenotypes are not yet clear. METHODS: We analyzed the genomes of 200 clinically annotated adult cases of de novo AML, using either whole-genome sequencing (50 cases) or whole-exome sequencing (150 cases), along with RNA and microRNA sequencing and DNA-methylation analysis. RESULTS: AML genomes have fewer mutations than most other adult cancers, with an average of only 13 mutations found in genes. Of these, an average of 5 are in genes that are recurrently mutated in AML. A total of 23 genes were significantly mutated, and another 237 were mutated in two or more samples. Nearly all samples had at least 1 nonsynonymous mutation in one of nine categories of genes that are almost certainly relevant for pathogenesis, including transcription-factor fusions (18% of cases), the gene encoding nucleophosmin (NPM1) (27%), tumor-suppressor genes (16%), DNA-methylation-related genes (44%), signaling genes (59%), chromatin-modifying genes (30%), myeloid transcription-factor genes (22%), cohesin-complex genes (13%), and spliceosome-complex genes (14%). Patterns of cooperation and mutual exclusivity suggested strong biologic relationships among several of the genes and categories. CONCLUSIONS: We identified at least one potential driver mutation in nearly all AML samples and found that a complex interplay of genetic events contributes to AML pathogenesis in individual patients. The databases from this study are widely available to serve as a foundation for further investigations of AML pathogenesis, classification, and risk stratification. (Funded by the National Institutes of Health.).
+SP  - 2059
+EP  - 2074
+VL  - 368
+IS  - 22
+AN  - 23634996
+UR  - https://www.ncbi.nlm.nih.gov/pubmed/23634996
+DO  - 10.1056/NEJMoa1301689
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3767041/
+U1  - 23634996[pmid]
+U2  - PMC3767041[pmcid]
+J2  - N Engl J Med
+JF  - The New England journal of medicine
+KW  - Adult
+KW  - CpG Islands
+KW  - DNA Methylation
+KW  - Epigenomics
+KW  - Female
+KW  - Gene Expression
+KW  - Gene Fusion
+KW  - Genome, Human
+KW  - Humans
+KW  - Leukemia, Myeloid, Acute/classification/*genetics
+KW  - Male
+KW  - MicroRNAs/genetics
+KW  - Middle Aged
+KW  - *Mutation
+KW  - Sequence Analysis, DNA/methods
+ER  - 
+TY  - JOUR
+ID  - RNA
+AU  - Love, Michael I.
+AU  - Huber, Wolfgang
+AU  - Anders, Simon
+PY  - 2014
+DA  - 2014/12/05
+TI  - Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2
+JO  - Genome Biology
+SP  - 550
+VL  - 15
+IS  - 12
+AB  - In comparative high-throughput sequencing assays, a fundamental task is the analysis of count data, such as read counts per gene in RNA-seq, for evidence of systematic changes across experimental conditions. Small replicate numbers, discreteness, large dynamic range and the presence of outliers require a suitable statistical approach. We present DESeq2, a method for differential analysis of count data, using shrinkage estimation for dispersions and fold changes to improve stability and interpretability of estimates. This enables a more quantitative analysis focused on the strength rather than the mere presence of differential expression. The DESeq2 package is available at http://www.bioconductor.org/packages/release/bioc/html/DESeq2.html.
+SN  - 1474-760X
+UR  - https://doi.org/10.1186/s13059-014-0550-8
+DO  - 10.1186/s13059-014-0550-8
+ID  - Love2014
+ER  - 
+TY  - JOUR
+ID  - GWAS
+AU  - Kruglyak, Leonid
+PY  - 2008
+DA  - 2008/04/01
+TI  - The road to genome-wide association studies
+JO  - Nature Reviews Genetics
+SP  - 314
+EP  - 318
+VL  - 9
+IS  - 4
+AB  - In this Essay, Leonid Kruglyak looks back at the concepts, resources and techniques that laid the necessary foundations for the recent explosion of genome-wide association studies, focusing on the less well-chronicled days before the launch of the HapMap project and speculates about future developments.
+SN  - 1471-0064
+UR  - https://doi.org/10.1038/nrg2316
+DO  - 10.1038/nrg2316
+ID  - Kruglyak2008
+ER  - 
+Provider: Silverchair
+Database: Oxford University Press
+Content: text/plain; charset="UTF-8"
+
+TY  - JOUR
+ID  - MSA
+AU  - Chatzou, Maria
+AU  - Magis, Cedrik
+AU  - Chang, Jia-Ming
+AU  - Kemena, Carsten
+AU  - Bussotti, Giovanni
+AU  - Erb, Ionas
+AU  - Notredame, Cedric
+T1  - Multiple sequence alignment modeling: methods and applications
+T2  - Briefings in Bioinformatics
+PY  - 2015
+Y1  - 2015/11/27/
+DO  - 10.1093/bib/bbv099
+JO  - Briefings in Bioinformatics
+JA  - bib
+VL  - 17
+IS  - 6
+SP  - 1009
+EP  - 1023
+SN  - 1467-5463
+AB  - This review provides an overview on the development of Multiple sequence alignment (MSA) methods and their main applications. It is focused on progress made over the past decade. The three first sections review recent algorithmic developments for protein, RNA/DNA and genomic alignments. The fourth section deals with benchmarks and explores the relationship between empirical and simulated data, along with the impact on method developments. The last part of the review gives an overview on available MSA local reliability estimators and their dependence on various algorithmic properties of available methods.
+Y2  - 12/14/2019
+UR  - https://doi.org/10.1093/bib/bbv099
+ER  - 
+
+
+TY  - JOUR
+ID  - Meta
+AU  - Quince, Christopher
+AU  - Walker, Alan W
+AU  - Simpson, Jared T
+AU  - Loman, Nicholas J
+AU  - Segata, Nicola
+PY  - 2017
+DA  - 2017/09/01
+TI  - Shotgun metagenomics, from sampling to analysis
+JO  - Nature Biotechnology
+SP  - 833
+EP  - 844
+VL  - 35
+IS  - 9
+AB  - The promises and potential pitfalls of shotgun metagenomics, from experimental design to computational analyses, are reviewed.
+SN  - 1546-1696
+UR  - https://doi.org/10.1038/nbt.3935
+DO  - 10.1038/nbt.3935
+ID  - Quince2017
+ER  - 
+TY  - JOUR
+ID  - ClinicalMeta
+AU  - Chiu, Charles Y.
+AU  - Miller, Steven A.
+PY  - 2019
+DA  - 2019/06/01
+TI  - Clinical metagenomics
+JO  - Nature Reviews Genetics
+SP  - 341
+EP  - 355
+VL  - 20
+IS  - 6
+AB  - Clinical metagenomic next-generation sequencing (mNGS), the comprehensive analysis of microbial and host genetic material (DNA and RNA) in samples from patients, is rapidly moving from research to clinical laboratories. This emerging approach is changing how physicians diagnose and treat infectious disease, with applications spanning a wide range of areas, including antimicrobial resistance, the microbiome, human host gene expression (transcriptomics) and oncology. Here, we focus on the challenges of implementing mNGS in the clinical laboratory and address potential solutions for maximizing its impact on patient care and public health.
+SN  - 1471-0064
+UR  - https://doi.org/10.1038/s41576-019-0113-7
+DO  - 10.1038/s41576-019-0113-7
+ID  - Chiu2019
+ER  - 
+TY  - JOUR
+ID  - Phylo
+AU  - Yang, Ziheng
+AU  - Rannala, Bruce
+PY  - 2012
+DA  - 2012/05/01
+TI  - Molecular phylogenetics: principles and practice
+JO  - Nature Reviews Genetics
+SP  - 303
+EP  - 314
+VL  - 13
+IS  - 5
+AB  - The rapid accumulation of genome sequence data has made phylogenetics an indispensable tool to various branches of biology. However, it has also posed considerable statistical and computational challenges to data analysis.Distance, parsimony, likelihood and Bayesian methods of phylogenetic analysis have different strengths and weaknesses. Although distance methods are good for large data sets of highly similar sequences, likelihood and Bayesian methods often have more power and are more robust, especially for inferring deep phylogenies.Assessing phylogenetic uncertainty remains a difficult statistical problem.Data partitioning may have an important influence on the phylogenetic analysis of genome-scale data sets.Systematic biases, such as long-branch attraction, may be more important than random sampling errors in the analysis of genomic-scale data sets.
+SN  - 1471-0064
+UR  - https://doi.org/10.1038/nrg3186
+DO  - 10.1038/nrg3186
+ID  - Yang2012
+ER  - 
+TY  - JOUR
+ID  - RNASeq
+DB  - PubMed
+AU  - Baruzzo, Giacomo
+AU  - Hayer, Katharina E
+AU  - Kim, Eun Ji
+AU  - Di Camillo, Barbara
+AU  - FitzGerald, Garret A
+AU  - Grant, Gregory R
+T1  - Simulation-based comprehensive benchmarking of RNA-seq aligners
+LA  - eng
+SN  - 1548-7105
+SN  - 1548-7091
+Y1  - 2017/02/
+ET  - 2016/12/12
+AB  - Alignment is the first step in most RNA-seq analysis pipelines, and the accuracy of downstream analyses depends heavily on it. Unlike most steps in the pipeline, alignment is particularly amenable to benchmarking with simulated data. We performed a comprehensive benchmarking of 14 common splice-aware aligners for base, read, and exon junction-level accuracy and compared default with optimized parameters. We found that performance varied by genome complexity, and accuracy and popularity were poorly correlated. The most widely cited tool underperforms for most metrics, particularly when using default settings.
+SP  - 135
+EP  - 139
+VL  - 14
+IS  - 2
+AN  - 27941783
+UR  - https://www.ncbi.nlm.nih.gov/pubmed/27941783
+DO  - 10.1038/nmeth.4106
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5792058/
+U1  - 27941783[pmid]
+U2  - PMC5792058[pmcid]
+U4  - nmeth.4106[PII]
+J2  - Nat Methods
+JF  - Nature methods
+KW  - Benchmarking
+KW  - Computer Simulation
+KW  - Exons
+KW  - Genome, Human
+KW  - Humans
+KW  - Introns
+KW  - Molecular Sequence Annotation
+KW  - Plasmodium falciparum/*genetics
+KW  - Polymorphism, Genetic
+KW  - RNA Splicing
+KW  - Sequence Alignment/*methods
+KW  - Sequence Analysis, RNA/*methods
+KW  - Software
+ER  - 
+TY  - JOUR
+ID  - NGS
+AU  - Goodwin, Sara
+AU  - McPherson, John D.
+AU  - McCombie, W. Richard
+PY  - 2016
+DA  - 2016/06/01
+TI  - Coming of age: ten years of next-generation sequencing technologies
+JO  - Nature Reviews Genetics
+SP  - 333
+EP  - 351
+VL  - 17
+IS  - 6
+AB  - There are two major paradigms in next-generation sequencing (NGS) technology: short-read sequencing and long-read sequencing. Short-read sequencing approaches provide lower-cost, higher-accuracy data that are useful for population-level research and clinical variant discovery. By contrast, long-read approaches provide read lengths that are well suited for de novo genome assembly applications and full-length isoform sequencing.NGS technologies have been evolving over the past 10 years, leading to substantial improvements in quality and yield; however, certain approaches have proven to be more effective and adaptable than others.Recent improvements in chemistry, costs, throughput and accessibility are driving the emergence of new, varied technologies to address applications that were not previously possible. These include integrated long-read and short-read sequencing studies, routine clinical DNA sequencing, real-time pathogen DNA monitoring and massive population-level projects.Although massive strides are being made in this technology, several notable limitations remain. The time required to sequence and analyse data limits the use of NGS in clinical applications in which time is an important factor; the costs and error rates of long-read sequencing make it prohibitive for routine use, and ethical considerations can limit the public and private use of genetic data.We can expect increasing democratization and options for NGS in the future. Many new instruments with varied chemistries and applications are being released or being developed.
+SN  - 1471-0064
+UR  - https://doi.org/10.1038/nrg.2016.49
+DO  - 10.1038/nrg.2016.49
+ID  - Goodwin2016
+ER  - 
+TY  - JOUR
+ID  - MCMC
+DB  - PubMed
+AU  - Hamra, Ghassan
+AU  - MacLehose, Richard
+AU  - Richardson, David
+T1  - Markov chain Monte Carlo: an introduction for epidemiologists
+LA  - eng
+SN  - 1464-3685
+SN  - 0300-5771
+Y1  - 2013/04/
+AB  - Markov Chain Monte Carlo (MCMC) methods are increasingly popular among epidemiologists. The reason for this may in part be that MCMC offers an appealing approach to handling some difficult types of analyses. Additionally, MCMC methods are those most commonly used for Bayesian analysis. However, epidemiologists are still largely unfamiliar with MCMC. They may lack familiarity either with he implementation of MCMC or with interpretation of the resultant output. As with tutorials outlining the calculus behind maximum likelihood in previous decades, a simple description of the machinery of MCMC is needed. We provide an introduction to conducting analyses with MCMC, and show that, given the same data and under certain model specifications, the results of an MCMC simulation match those of methods based on standard maximum-likelihood estimation (MLE). In addition, we highlight examples of instances in which MCMC approaches to data analysis provide a clear advantage over MLE. We hope that this brief tutorial will encourage epidemiologists to consider MCMC approaches as part of their analytic tool-kit.
+SP  - 627
+EP  - 634
+VL  - 42
+IS  - 2
+AN  - 23569196
+UR  - https://www.ncbi.nlm.nih.gov/pubmed/23569196
+DO  - 10.1093/ije/dyt043
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3619958/
+U1  - 23569196[pmid]
+U2  - PMC3619958[pmcid]
+U4  - dyt043[PII]
+J2  - Int J Epidemiol
+JF  - International journal of epidemiology
+KW  - Bayes Theorem
+KW  - Computer Simulation
+KW  - *Epidemiologic Studies
+KW  - Humans
+KW  - Likelihood Functions
+KW  - *Markov Chains
+KW  - *Monte Carlo Method
+PB  - Oxford University Press
+ER  - 

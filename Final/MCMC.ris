@@ -1,0 +1,33 @@
+TY  - JOUR
+DB  - PubMed
+AU  - Hamra, Ghassan
+AU  - MacLehose, Richard
+AU  - Richardson, David
+T1  - Markov chain Monte Carlo: an introduction for epidemiologists
+LA  - eng
+SN  - 1464-3685
+SN  - 0300-5771
+Y1  - 2013/04/
+AB  - Markov Chain Monte Carlo (MCMC) methods are increasingly popular among epidemiologists. The reason for this may in part be that MCMC offers an appealing approach to handling some difficult types of analyses. Additionally, MCMC methods are those most commonly used for Bayesian analysis. However, epidemiologists are still largely unfamiliar with MCMC. They may lack familiarity either with he implementation of MCMC or with interpretation of the resultant output. As with tutorials outlining the calculus behind maximum likelihood in previous decades, a simple description of the machinery of MCMC is needed. We provide an introduction to conducting analyses with MCMC, and show that, given the same data and under certain model specifications, the results of an MCMC simulation match those of methods based on standard maximum-likelihood estimation (MLE). In addition, we highlight examples of instances in which MCMC approaches to data analysis provide a clear advantage over MLE. We hope that this brief tutorial will encourage epidemiologists to consider MCMC approaches as part of their analytic tool-kit.
+SP  - 627
+EP  - 634
+VL  - 42
+IS  - 2
+AN  - 23569196
+UR  - https://www.ncbi.nlm.nih.gov/pubmed/23569196
+DO  - 10.1093/ije/dyt043
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3619958/
+U1  - 23569196[pmid]
+U2  - PMC3619958[pmcid]
+U4  - dyt043[PII]
+J2  - Int J Epidemiol
+JF  - International journal of epidemiology
+KW  - Bayes Theorem
+KW  - Computer Simulation
+KW  - *Epidemiologic Studies
+KW  - Humans
+KW  - Likelihood Functions
+KW  - *Markov Chains
+KW  - *Monte Carlo Method
+PB  - Oxford University Press
+ER  - 
